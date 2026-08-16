@@ -1,0 +1,29 @@
+kind = "web"
+previewPath = "/"
+title = "Kaleidoscope AI"
+description = "A secure AI learning engine that turns any topic into a visual mindmap, everyday analogy, memory rap, and active-recall quiz using Gemini."
+version = "1.0.0"
+id = "artifacts/kaleidoscope-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21097
+
+[services.development]
+run = "pnpm --filter @workspace/kaleidoscope-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/kaleidoscope-ai", "run", "build" ]
+
+[services.production.run]
+args = ["node", "artifacts/kaleidoscope-ai/server.js"]
+
+[services.production.run.env]
+PORT = "21097"
+NODE_ENV = "production"
+
+[services.env]
+PORT = "21097"
+BASE_PATH = "/"

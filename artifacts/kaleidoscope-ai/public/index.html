@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#080b1b" />
+    <meta
+      name="description"
+      content="Kaleidoscope AI turns intimidating topics into vivid, memorable learning moments."
+    />
+    <title>Kaleidoscope AI — Find the pattern</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"
+      defer
+    ></script>
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="space-noise" aria-hidden="true"></div>
+    <div class="starfield starfield-one" aria-hidden="true"></div>
+    <div class="starfield starfield-two" aria-hidden="true"></div>
+
+    <a class="skip-link" href="#main-content">Skip to learning space</a>
+
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Kaleidoscope AI home">
+        <span class="brand-mark" aria-hidden="true">🌀</span>
+        <span class="brand-name">KALEIDOSCOPE <span class="brand-ai">AI</span></span>
+      </a>
+      <div class="header-status" aria-label="Connection status">
+        <span class="status-dot"></span>
+        <span>private learning space</span>
+      </div>
+    </header>
+
+    <main id="main-content" class="page-shell">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="eyebrow"><span class="eyebrow-line"></span> An AI learning engine</div>
+        <h1 id="page-title">
+          Find the pattern hiding<br />
+          inside <em>any idea.</em>
+        </h1>
+        <p class="hero-copy">
+          Bring a topic that feels foggy. Kaleidoscope turns it into a visual map,
+          a story you can feel, and questions that make it stick.
+        </p>
+
+        <form id="topic-form" class="topic-form" novalidate>
+          <label class="sr-only" for="topic-input">What do you want to understand?</label>
+          <div class="input-wrap">
+            <span class="input-orbit" aria-hidden="true"></span>
+            <input
+              id="topic-input"
+              name="topic"
+              type="text"
+              value="Photosynthesis"
+              autocomplete="off"
+              spellcheck="true"
+              maxlength="120"
+              placeholder="What do you want to understand?"
+              aria-describedby="topic-hint"
+              required
+            />
+            <button id="generate-button" class="generate-button" type="submit">
+              <span>Generate</span>
+              <span class="button-arrow" aria-hidden="true">↗</span>
+            </button>
+          </div>
+          <div class="form-meta">
+            <span id="topic-hint">Try a concept, a person, or a question.</span>
+            <span class="enter-hint"><kbd>Enter</kbd> to explore</span>
+          </div>
+          <div class="topic-suggestions" aria-label="Topic suggestions">
+            <span class="suggestion-label">Try</span>
+            <button type="button" class="suggestion" data-topic="Black holes">Black holes</button>
+            <button type="button" class="suggestion" data-topic="The French Revolution">The French Revolution</button>
+            <button type="button" class="suggestion" data-topic="How vaccines work">How vaccines work</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="learning-space" class="learning-space" aria-live="polite">
+        <div id="empty-state" class="empty-state">
+          <div class="constellation-orbit" aria-hidden="true">
+            <span class="orbit orbit-a"></span>
+            <span class="orbit orbit-b"></span>
+            <span class="orbit-core">✦</span>
+            <span class="orbit-star star-a">·</span>
+            <span class="orbit-star star-b">·</span>
+            <span class="orbit-star star-c">·</span>
+          </div>
+          <p class="empty-kicker">Your observatory is ready</p>
+          <h2>One topic.<br /><span>Many ways in.</span></h2>
+          <p class="empty-copy">
+            Enter a topic above and we’ll open four doors into the same idea:
+            its shape, its story, its rhythm, and your recall.
+          </p>
+        </div>
+
+        <div id="loading-state" class="loading-state" hidden>
+          <div class="loading-visual" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <p class="loading-kicker">Stand by, explorer</p>
+          <h2 id="loading-message">Gemini is weaving your multiverse...</h2>
+          <p>Connecting the dots and tuning the signal.</p>
+        </div>
+
+        <div id="error-state" class="error-state" role="alert" hidden>
+          <div class="error-symbol" aria-hidden="true">!</div>
+          <div>
+            <p class="error-kicker">Signal interrupted</p>
+            <h2>We couldn’t open that constellation.</h2>
+            <p id="error-message">Check your topic and try again.</p>
+          </div>
+          <button id="retry-button" class="text-button" type="button">Try again <span aria-hidden="true">↗</span></button>
+        </div>
+
+        <div id="results" class="results" hidden>
+          <div class="results-heading">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-line"></span> Your learning constellation</div>
+              <h2 id="results-title">Photosynthesis</h2>
+            </div>
+            <button id="new-topic-button" class="ghost-button" type="button">
+              <span aria-hidden="true">＋</span> New topic
+            </button>
+          </div>
+
+          <div class="result-grid">
+            <article class="panel mindmap-panel">
+              <div class="panel-topline">
+                <div>
+                  <span class="panel-index">01</span>
+                  <h3>See the shape</h3>
+                </div>
+                <span class="panel-tag">visual map</span>
+              </div>
+              <div id="mindmap" class="mindmap" aria-label="Visual mindmap of the topic"></div>
+              <div id="mindmap-fallback" class="content-fallback" hidden></div>
+            </article>
+
+            <article class="panel analogy-panel">
+              <div class="panel-topline">
+                <div>
+                  <span class="panel-index">02</span>
+                  <h3>Make it familiar</h3>
+                </div>
+                <span class="panel-tag">everyday analogy</span>
+              </div>
+              <div id="analogy-content" class="rich-content"></div>
+              <div class="analogy-spark" aria-hidden="true">✦</div>
+            </article>
+
+            <article class="panel rap-panel">
+              <div class="panel-topline">
+                <div>
+                  <span class="panel-index">03</span>
+                  <h3>Give it a rhythm</h3>
+                </div>
+                <span class="panel-tag">memory rap</span>
+              </div>
+              <div class="rap-content">
+                <div id="rap-content" class="rich-content"></div>
+                <button id="read-aloud-button" class="read-aloud" type="button" aria-pressed="false">
+                  <span aria-hidden="true">🔊</span>
+                  <span>Read Aloud</span>
+                </button>
+              </div>
+            </article>
+
+            <article class="panel quiz-panel">
+              <div class="panel-topline quiz-topline">
+                <div>
+                  <span class="panel-index">04</span>
+                  <h3>Make it stick</h3>
+                </div>
+                <span class="panel-tag panel-tag-accent">active recall</span>
+              </div>
+              <div class="quiz-intro">
+                <p>Don’t peek. Your first instinct is useful data.</p>
+                <span id="quiz-progress" class="quiz-progress">0 / 3 answered</span>
+              </div>
+              <div id="quiz-list" class="quiz-list"></div>
+            </article>
+          </div>
+
+          <div class="results-footnote">
+            <span class="footnote-mark" aria-hidden="true">✦</span>
+            <span>Keep the pattern, not just the answer. Come back and test yourself tomorrow.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>KALEIDOSCOPE AI / 01</span>
+      <span>Built for curious minds</span>
+      <span>Client-side secure · no API keys in the browser</span>
+    </footer>
+  </body>
+</html>

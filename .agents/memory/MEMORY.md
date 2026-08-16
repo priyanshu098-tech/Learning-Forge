@@ -1,0 +1,1 @@
+- [Preview API routing](kaleidoscope-preview-routing.md) — the shared API service owns `/api/*` before the root web artifact.

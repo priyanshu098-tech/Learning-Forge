@@ -1,0 +1,19 @@
+{
+  "name": "@workspace/kaleidoscope-ai",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node -e \"console.info('Kaleidoscope AI is served directly from public/')\"",
+    "serve": "node server.js",
+    "typecheck": "node --check server.js && node --check public/script.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^5.2.1"
+  }
+}

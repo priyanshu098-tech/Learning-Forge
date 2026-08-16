@@ -1,15 +1,16 @@
-# [Project name]
+# Kaleidoscope AI
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Kaleidoscope AI is a secure Gemini-powered learning engine that turns a topic into a visual mindmap, everyday analogy, memory rap, and active-recall quiz.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/api-server run dev` — run the shared API server
+- `pnpm --filter @workspace/kaleidoscope-ai run dev` — run the Kaleidoscope web experience
 - `pnpm run typecheck` — full typecheck across all packages
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Required secret for generation: `GEMINI_API_KEY`
 
 ## Stack
 
@@ -22,23 +23,34 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/kaleidoscope-ai/public/` — static frontend (`index.html`, `style.css`, `script.js`)
+- `artifacts/kaleidoscope-ai/server.js` — standalone Express server for local use
+- `artifacts/api-server/src/routes/generate.ts` — shared `/api/generate` route used by the preview proxy
+- `artifacts/kaleidoscope-ai/README.md` — local install and start instructions
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Gemini is called only from server code; the browser sends topics to a same-origin endpoint and never receives the API key.
+- The frontend is deliberately vanilla HTML, CSS, and JavaScript so the hackathon submission remains easy to run with `npm start`.
+- The shared API server mirrors the standalone endpoint because the Replit preview proxy reserves `/api` for the API service.
+- Gemini responses are schema-checked before they reach the browser so malformed model output fails safely.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- Topic input with Photosynthesis demo prefill and quick suggestions
+- Mermaid dark-theme visual mindmap
+- Two-sentence analogy and four-line memory rap
+- Browser text-to-speech for the rap
+- Three-question active-recall quiz with retry-on-wrong behavior
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep Gemini credentials server-side and never expose them in frontend assets.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Add `GEMINI_API_KEY` as a Replit Secret before testing real generation; the checked-in `.env.example` is intentionally only a placeholder.
+- The app can be run standalone from `artifacts/kaleidoscope-ai` with `npm install && npm start`, or through the managed workspace workflows.
 
 ## Pointers
 
