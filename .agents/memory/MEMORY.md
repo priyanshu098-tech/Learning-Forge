@@ -1,1 +1,2 @@
 - [Preview API routing](kaleidoscope-preview-routing.md) — the shared API service owns `/api/*` before the root web artifact.
+- [Groq model availability](groq-model-availability.md) — query the live model catalog when legacy Groq model IDs fail.

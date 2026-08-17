@@ -124,7 +124,7 @@ app.post("/api/generate", async (request, response) => {
         },
         { role: "user", content: generationPrompt(topic) },
       ],
-      model: "mixtral-8x7b-32768",
+      model: "openai/gpt-oss-120b",
       temperature: 0.4,
       max_tokens: 1024,
       response_format: { type: "json_object" },
