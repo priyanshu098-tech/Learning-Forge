@@ -85,6 +85,37 @@
             <button type="button" class="suggestion" data-topic="How vaccines work">How vaccines work</button>
           </div>
         </form>
+
+        <div class="scan-divider" aria-hidden="true">
+          <span>or begin with a page</span>
+        </div>
+
+        <section class="scan-panel" aria-labelledby="scan-title">
+          <div class="scan-copy">
+            <div class="scan-eyebrow"><span class="scan-icon" aria-hidden="true">⌁</span> Gemini vision scan</div>
+            <h2 id="scan-title">Turn a textbook page into a starting point.</h2>
+            <p>Upload a clear page photo. Gemini will find the main idea, then Kaleidoscope will build the memory constellation around it.</p>
+          </div>
+          <div class="scan-controls">
+            <input id="page-input" type="file" accept="image/jpeg,image/png,image/webp,image/gif" hidden />
+            <label class="file-picker" for="page-input">
+              <span class="file-picker-icon" aria-hidden="true">＋</span>
+              <span>
+                <strong id="file-name">Choose an image</strong>
+                <small>JPG, PNG, WEBP · up to 8 MB</small>
+              </span>
+            </label>
+            <div id="page-preview-wrap" class="page-preview-wrap" hidden>
+              <img id="page-preview" alt="Selected textbook page preview" />
+              <button id="clear-page-button" class="clear-page-button" type="button" aria-label="Remove selected image">×</button>
+            </div>
+            <button id="scan-button" class="scan-button" type="button">
+              <span aria-hidden="true">✦</span>
+              <span>Scan page</span>
+            </button>
+            <p id="scan-status" class="scan-status" role="status">Your image stays in memory while it is read.</p>
+          </div>
+        </section>
       </section>
 
       <section id="learning-space" class="learning-space" aria-live="polite">
@@ -110,7 +141,7 @@
             <span></span><span></span><span></span>
           </div>
           <p class="loading-kicker">Stand by, explorer</p>
-          <h2 id="loading-message">Gemini is weaving your multiverse...</h2>
+          <h2 id="loading-message">The learning engine is weaving your constellation...</h2>
           <p>Connecting the dots and tuning the signal.</p>
         </div>
 

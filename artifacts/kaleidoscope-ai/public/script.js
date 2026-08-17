@@ -21,10 +21,19 @@
   const rapContent = document.getElementById('rap-content');
   const quizList = document.getElementById('quiz-list');
   const quizProgress = document.getElementById('quiz-progress');
+  const pageInput = document.getElementById('page-input');
+  const pagePreviewWrap = document.getElementById('page-preview-wrap');
+  const pagePreview = document.getElementById('page-preview');
+  const fileName = document.getElementById('file-name');
+  const clearPageButton = document.getElementById('clear-page-button');
+  const scanButton = document.getElementById('scan-button');
+  const scanStatus = document.getElementById('scan-status');
 
   let lastTopic = topicInput.value.trim();
   let activeRap = '';
   let mermaidCounter = 0;
+  let pageFile = null;
+  let pageObjectUrl = '';
 
   function showOnly(view) {
     [emptyState, loadingState, errorState, results].forEach(function (element) {
@@ -35,6 +44,7 @@
   function setBusy(isBusy) {
     topicInput.disabled = isBusy;
     generateButton.disabled = isBusy;
+    scanButton.disabled = isBusy || !pageFile;
     generateButton.querySelector('span').textContent = isBusy ? 'Mapping…' : 'Generate';
     generateButton.setAttribute('aria-busy', String(isBusy));
   }
@@ -49,6 +59,100 @@
     errorMessage.textContent = message || 'Something unexpected happened. Try another topic.';
     setBusy(false);
     showOnly(errorState);
+  }
+
+  function setScanStatus(message, state) {
+    scanStatus.textContent = message;
+    scanStatus.className = 'scan-status' + (state ? ' is-' + state : '');
+  }
+
+  function clearPage() {
+    pageFile = null;
+    if (pageObjectUrl) {
+      URL.revokeObjectURL(pageObjectUrl);
+      pageObjectUrl = '';
+    }
+    pageInput.value = '';
+    pagePreview.removeAttribute('src');
+    pagePreviewWrap.hidden = true;
+    fileName.textContent = 'Choose an image';
+    setScanStatus('Your image stays in memory while it is read.');
+    setBusy(false);
+  }
+
+  function handlePageSelected() {
+    const selectedFile = pageInput.files && pageInput.files[0];
+    if (!selectedFile) return;
+
+    if (!/^image\/(jpeg|png|webp|gif)$/i.test(selectedFile.type)) {
+      clearPage();
+      setScanStatus('Choose a JPG, PNG, WEBP, or GIF image.', 'error');
+      return;
+    }
+    if (selectedFile.size > 8 * 1024 * 1024) {
+      clearPage();
+      setScanStatus('That image is too large. Keep it under 8 MB.', 'error');
+      return;
+    }
+
+    pageFile = selectedFile;
+    pageObjectUrl = URL.createObjectURL(selectedFile);
+    pagePreview.src = pageObjectUrl;
+    pagePreviewWrap.hidden = false;
+    fileName.textContent = selectedFile.name;
+    setScanStatus('Ready to scan. We’ll identify the page’s main idea.');
+    setBusy(false);
+  }
+
+  async function scanPage() {
+    if (!pageFile) {
+      setScanStatus('Choose a textbook image first.', 'error');
+      pageInput.click();
+      return;
+    }
+
+    scanButton.disabled = true;
+    pageInput.disabled = true;
+    clearPageButton.disabled = true;
+    setScanStatus('Reading the page and finding its signal…');
+
+    const formData = new FormData();
+    formData.append('page', pageFile);
+
+    try {
+      const response = await fetch('/api/scan', {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: formData
+      });
+      let payload = {};
+      try {
+        payload = await response.json();
+      } catch (parseError) {
+        payload = {};
+      }
+      if (!response.ok) {
+        throw new Error(payload.error || 'The vision scanner returned an error.');
+      }
+
+      const topic = textValue(payload.topic, '');
+      if (!topic) {
+        throw new Error('No clear topic was found on that page.');
+      }
+      topicInput.value = topic;
+      topicInput.dispatchEvent(new Event('input', { bubbles: true }));
+      const confidence =
+        typeof payload.confidence === 'number'
+          ? ' · ' + Math.round(payload.confidence * 100) + '% confidence'
+          : '';
+      setScanStatus('Found “' + topic + '”' + confidence + '. Building your learning set…', 'success');
+      await generate(topic);
+    } catch (error) {
+      setScanStatus(error.message || 'We could not read that page. Try another image.', 'error');
+      scanButton.disabled = false;
+      pageInput.disabled = false;
+      clearPageButton.disabled = false;
+    }
   }
 
   function textValue(value, fallback) {
@@ -328,6 +432,9 @@
 
   readAloudButton.addEventListener('click', toggleReadAloud);
   quizList.addEventListener('click', handleQuizClick);
+  pageInput.addEventListener('change', handlePageSelected);
+  scanButton.addEventListener('click', scanPage);
+  clearPageButton.addEventListener('click', clearPage);
 
   document.querySelectorAll('.suggestion').forEach(function (button) {
     button.addEventListener('click', function () {

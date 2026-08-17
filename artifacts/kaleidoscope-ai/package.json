@@ -11,9 +11,11 @@
     "typecheck": "node --check server.js && node --check public/script.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "cors": "^2.8.6",
     "dotenv": "^16.6.1",
     "express": "^5.2.1",
-    "groq-sdk": "^0.27.0"
+    "groq-sdk": "^0.27.0",
+    "multer": "^2.0.2"
   }
 }

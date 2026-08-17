@@ -403,6 +403,223 @@ kbd {
   background: var(--glass-bright);
 }
 
+.scan-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 720px;
+  margin: 22px auto 0;
+  color: var(--soft);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scan-divider::before,
+.scan-divider::after {
+  height: 1px;
+  flex: 1;
+  content: '';
+  background: var(--line);
+}
+
+.scan-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  gap: 28px;
+  align-items: center;
+  max-width: 720px;
+  margin: 18px auto 0;
+  padding: 22px 24px;
+  border: 1px solid rgba(158, 232, 205, 0.16);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(158, 232, 205, 0.09), transparent 16rem),
+    rgba(15, 25, 47, 0.5);
+}
+
+.scan-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  color: var(--mint);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scan-icon {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border: 1px solid rgba(158, 232, 205, 0.35);
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.scan-copy h2 {
+  max-width: 330px;
+  margin-bottom: 8px;
+  color: var(--ink);
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+.scan-copy p {
+  max-width: 390px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.scan-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 9px;
+  align-items: center;
+}
+
+.file-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  color: var(--muted);
+  border: 1px dashed rgba(179, 156, 255, 0.42);
+  border-radius: 10px;
+  background: rgba(8, 11, 27, 0.32);
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.file-picker:hover {
+  color: var(--ink);
+  border-color: var(--violet);
+  background: rgba(35, 40, 78, 0.55);
+}
+
+.file-picker-icon {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 auto;
+  place-items: center;
+  color: var(--violet);
+  border: 1px solid rgba(179, 156, 255, 0.32);
+  border-radius: 8px;
+  font-size: 17px;
+}
+
+.file-picker strong,
+.file-picker small {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-picker strong {
+  color: inherit;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.file-picker small {
+  margin-top: 3px;
+  color: var(--soft);
+  font-family: var(--mono);
+  font-size: 8px;
+}
+
+.scan-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 49px;
+  padding: 0 13px;
+  color: var(--night);
+  border: 0;
+  border-radius: 10px;
+  background: var(--mint);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
+}
+
+.scan-button:hover:not(:disabled) {
+  background: #b8f4df;
+  transform: translateY(-2px);
+}
+
+.scan-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.scan-status {
+  grid-column: 1 / -1;
+  min-height: 14px;
+  margin: 0;
+  color: var(--soft);
+  font-family: var(--mono);
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+.scan-status.is-error {
+  color: var(--coral);
+}
+
+.scan-status.is-success {
+  color: var(--mint);
+}
+
+.page-preview-wrap {
+  position: relative;
+  grid-column: 1 / -1;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(8, 11, 27, 0.42);
+}
+
+.page-preview-wrap img {
+  display: block;
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  opacity: 0.82;
+}
+
+.clear-page-button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  display: grid;
+  width: 25px;
+  height: 25px;
+  place-items: center;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(8, 11, 27, 0.72);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.clear-page-button:hover {
+  color: var(--coral);
+}
+
 .learning-space {
   min-height: 390px;
   margin-top: 122px;
@@ -1054,6 +1271,20 @@ kbd {
   .hero-copy {
     margin-bottom: 30px;
     font-size: 14px;
+  }
+
+  .scan-panel {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .scan-copy h2 {
+    max-width: 270px;
+  }
+
+  .scan-controls {
+    grid-template-columns: minmax(0, 1fr) auto;
   }
 
   .input-wrap {
