@@ -10,13 +10,16 @@ Kaleidoscope AI turns a topic into four memorable learning artifacts: a Mermaid 
    npm install
    ```
 
-2. Add your Gemini key to `.env`:
+2. Add your Groq key to the server environment:
 
    ```env
-   GEMINI_API_KEY=your_key_here
+   GROQ_API_KEY=your_key_here
    ```
 
    Keep this value on the server. It is never sent to the browser.
+
+   In Replit, add `GROQ_API_KEY` as a Secret. For local development, you can
+   place it in a local `.env` file that is not committed.
 
 3. Start the server:
 

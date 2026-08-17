@@ -1,6 +1,6 @@
 # Kaleidoscope AI
 
-Kaleidoscope AI is a secure Gemini-powered learning engine that turns a topic into a visual mindmap, everyday analogy, memory rap, and active-recall quiz.
+Kaleidoscope AI is a secure Groq-powered learning engine that turns a topic into a visual mindmap, everyday analogy, memory rap, and active-recall quiz.
 
 ## Run & Operate
 
@@ -10,7 +10,7 @@ Kaleidoscope AI is a secure Gemini-powered learning engine that turns a topic in
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required secret for generation: `GEMINI_API_KEY`
+- Required secret for generation: `GROQ_API_KEY`
 
 ## Stack
 
@@ -30,10 +30,10 @@ Kaleidoscope AI is a secure Gemini-powered learning engine that turns a topic in
 
 ## Architecture decisions
 
-- Gemini is called only from server code; the browser sends topics to a same-origin endpoint and never receives the API key.
+- Groq is called only from server code; the browser sends topics to a same-origin endpoint and never receives the API key.
 - The frontend is deliberately vanilla HTML, CSS, and JavaScript so the hackathon submission remains easy to run with `npm start`.
 - The shared API server mirrors the standalone endpoint because the Replit preview proxy reserves `/api` for the API service.
-- Gemini responses are schema-checked before they reach the browser so malformed model output fails safely.
+- Groq responses are schema-checked before they reach the browser so malformed model output fails safely.
 
 ## Product
 
@@ -45,11 +45,11 @@ Kaleidoscope AI is a secure Gemini-powered learning engine that turns a topic in
 
 ## User preferences
 
-- Keep Gemini credentials server-side and never expose them in frontend assets.
+- Keep Groq credentials server-side and never expose them in frontend assets.
 
 ## Gotchas
 
-- Add `GEMINI_API_KEY` as a Replit Secret before testing real generation; the checked-in `.env.example` is intentionally only a placeholder.
+- Add `GROQ_API_KEY` as a Replit Secret before testing real generation; the checked-in `.env.example` is intentionally only a placeholder.
 - The app can be run standalone from `artifacts/kaleidoscope-ai` with `npm install && npm start`, or through the managed workspace workflows.
 
 ## Pointers
