@@ -1,55 +1,65 @@
-# 🌀 Kaleidoscope AI
+# 🔥 Learning Forge
 
-> *One topic. Four lenses. Learn like a polymath.*
+> *Scan a page. Type a topic. Unlock learning in 4 dimensions.*
 
-[![Live Demo] https://learning-forge--avasthishivam13.replit.app/
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Try_Now-7c3aed?style=for-the-badge&logo=replit&logoColor=white)](https://learning-forge--avasthivisham13.replit.app/)
 [![Hackathon](https://img.shields.io/badge/Suvidha_AI_Hackathon-2026-0a2c4e?style=for-the-badge)](https://suvidha-ai-virtual-hackathon.devpost.com)
+[![Made with Node](https://img.shields.io/badge/Made_with-Node.js-339933?style=for-the-badge&logo=node.js)](https://nodejs.org/)
 
 ---
 
-## 🧠 The Problem
+## 🧠 The Real Problem
 
-**Linear text is a barrier.** 
+Textbooks are built for the *average* brain. But what if your brain isn't average? 
 
-Students with ADHD, dyslexia, or low vision often suffer from **cognitive overload** when faced with dense textbook pages. They aren't locked out because they aren't smart—they are locked out because the *format* doesn't fit their brain.
+For students with **ADHD**, **Dyslexia**, or **Low Vision**, dense paragraphs aren't just boring—they are a **locked door**. These students can't filter signal from noise. They get lost before they even start.
 
-We built **Kaleidoscope AI** for **Maya**, a 14-year-old with ADHD who shuts down when she sees a wall of text. She needs information broken down into **visuals**, **stories**, **rhythms**, and **interactive challenges** to truly learn.
-
----
-
-## ✨ Key Features
-
-| Feature | Description |
-| :--- | :--- |
-| **⌨️ Type Any Topic** | Type "Photosynthesis" or "Quantum Physics" → Get 4 dynamic artifacts instantly. |
-| **📸 Scan Textbook Page** | Take a photo of any page. Gemini Vision extracts the main topic, summary, and key terms. |
-| **🧠 Visual Mindmap** | Auto-generated Mermaid.js flowchart showing cause/effect and relationships. |
-| **🔗 Everyday Analogy** | Complex topics explained using sports, cooking, or movies. (Click any word to drill down!) |
-| **🎤 Memory Rap** | A catchy, rhyming 4-line verse to lock concepts into long-term memory. **Listen** with the built-in Text-to-Speech. |
-| **❓ Interactive Quiz** | 3 multiple-choice questions with instant feedback. Active recall, not passive reading. |
-| **🔍 Focus Mode (Infinite Drill-down)** | Click *any* word in the Analogy or Rap. The entire page regenerates to explain just *that* concept. Never get stuck again. |
+**Learning Forge** removes that barrier. We turn one dense topic into **4 distinct weapons of learning**—so every student can finally find the key that fits their brain.
 
 ---
 
-## 🏗️ Architecture & Tech Stack
+## ✨ The 4 Weapons of Learning
 
-![Architecture Diagram](https://via.placeholder.com/800x300?text=Scan+%3E+Gemini+Vision+%3E+Groq+LLM+%3E+Mermaid+%2B+Quiz)
-
-| Layer | Technology | Purpose |
+| Weapon | What it does | Why it wins |
 | :--- | :--- | :--- |
-| **Frontend** | HTML, CSS (Glassmorphism), JavaScript | User interface, rendering Mermaid charts, Web Speech API for TTS. |
-| **Backend** | Node.js + Express.js | API routing, security (hiding API keys), serving static files. |
-| **Vision AI** | Google Gemini 1.5 Flash | Extracts text structure, main topics, and key terms from uploaded images. |
-| **Text Generation** | Groq (Mixtral-8x7b-32768) | Generates structured JSON (Mindmap code, Analogy, Rap, Quiz) with ultra-low latency. |
-| **Visualization** | Mermaid.js | Renders dynamic flowcharts from the generated code. |
+| 🧠 **Visual Mindmap** | Auto-generates a flow-chart of the topic (using Mermaid.js) | Spatial/Visual learners finally see the "big picture" and cause/effect. |
+| 🔗 **Everyday Analogy** | Explains the topic using sports, cooking, or movies | Relational thinkers connect new ideas to things they already know. |
+| 🎤 **Memory Rap** | A catchy, rhyming 4-line verse. Press "Listen" to hear it. | Auditory/Musical learners lock it into long-term memory. |
+| ❓ **Interactive Quiz** | 3 multiple-choice questions with instant feedback | Active recall solidifies knowledge instead of passive reading. |
 
 ---
 
-## 🚀 Getting Started (Local Development)
+## 📸 Bonus: The "Scan" Feature
 
-Follow these steps to run the project on your local machine:
+We didn't stop at typing. 
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+If the student has a **physical textbook**, they just click **"📸 Scan Page"**, take a photo, and **Gemini Vision** reads the page, extracts the main topic and key terms, and automatically loads everything into the 4 weapons. 
+
+**No typing required. No friction. Just learning.**
+
+---
+
+## 🔍 The "Focus Mode" (Infinite Drill-down)
+
+Ever read a sentence, get stuck on one word, and just give up? 
+
+In **Learning Forge**, you **click any word** in the Analogy or Rap. The entire app instantly regenerates a *brand new* Mindmap, Analogy, Rap, and Quiz for *just that word*. 
+
+The user never gets stuck because they can drill down infinitely until they *actually* understand.
+
+---
+
+## ⚙️ How the Tech Works
+
+```mermaid
+graph LR
+    A[User Input] --> B{Entry Method};
+    B -->|Text| C[Groq LLM];
+    B -->|Scan Image| D[Gemini Vision];
+    D -->|Extracts Topic| C;
+    C -->|Structured JSON| E[Frontend Renderer];
+    E --> F[Mermaid.js Diagram];
+    E --> G[Analogy + Rap Text];
+    E --> H[Interactive Quiz];
+    G --> I[Click Word → Focus Mode];
+    I --> C;
